@@ -7,14 +7,56 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 router.get('/', (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
+  Product.findAll({
+    include: {
+      model: Category,
+      attributes: ['id','category_name']//! do i need ID?
+    },
+    include: {
+      model: Tag,
+      attributes: ['id','tag']
+    }
+  })
+
+  .then({
+
+  })//TODO ive done none of my .thens lol
+
+  .catch(err =>{
+    console.log(err);
+    res.status(500).json(err);
+  });
+  
 });
 
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-});
+  Product.findOne({
+    where:{
+      id: req.params.id//!know its needed but need explination
+    },
+    include: {
+      model: Category,
+      attributes: ['id','category_name']//! do i need ID?
+    },
+    include: {
+      model: Tag,
+      attributes: ['id','tag']
+    }
+  })
 
+  .then({
+
+  })
+
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err)
+  });
+});
+//! below came with set up can you explain
 // create new product
 router.post('/', (req, res) => {
   /* req.body should look like this...
@@ -26,7 +68,7 @@ router.post('/', (req, res) => {
     }
   */
   Product.create(req.body)
-    .then((product) => {
+.then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
@@ -47,6 +89,8 @@ router.post('/', (req, res) => {
     });
 });
 
+
+//* this info was given havent done anything pls explain
 // update product
 router.put('/:id', (req, res) => {
   // update product data
@@ -91,6 +135,25 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  Product.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  //! used the same then for all three for delete and update is this ok?
+
+  .then(ProductData => {
+    if (!ProductData) {
+        res.status(404).json({ message: 'No Product found with this id' });
+        return;
+    }
+    res.json(ProductData);
+    })
+
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 module.exports = router;
