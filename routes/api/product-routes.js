@@ -8,19 +8,18 @@ router.get('/', (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   Product.findAll({
-    include: {
-      model: Category,
-      attributes: ['id','category_name']//! do i need ID?
-    },
-    include: {
-      model: Tag,
-      attributes: ['id','tag']
-    }
+    include: [
+      Category,{model:Tag, through:ProductTag}
+    ]
   })
 
-  .then({
-
-  })//TODO ive done none of my .thens lol
+  .then(ProductData => {
+    if (!ProductData) {
+        res.status(404).json({ message: 'No Product found with this id' });
+        return;
+    }
+    res.json(ProductData);
+    })
 
   .catch(err =>{
     console.log(err);
@@ -35,28 +34,31 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Category and Tag data
   Product.findOne({
     where:{
-      id: req.params.id//!know its needed but need explination
+      id: req.params.id
     },
     include: {
       model: Category,
-      attributes: ['id','category_name']//! do i need ID?
     },
     include: {
       model: Tag,
-      attributes: ['id','tag']
     }
   })
 
-  .then({
-
-  })
+  .then(productData => {
+    if (!productData) {
+        res.status(404).json({ message: 'No Product found with this id' });
+        return;
+    }
+    res.json(productData);
+    })
 
   .catch(err => {
     console.log(err);
     res.status(500).json(err)
   });
 });
-//! below came with set up can you explain
+
+
 // create new product
 router.post('/', (req, res) => {
   /* req.body should look like this...
@@ -140,7 +142,6 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
-  //! used the same then for all three for delete and update is this ok?
 
   .then(ProductData => {
     if (!ProductData) {
