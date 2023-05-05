@@ -6,8 +6,10 @@ Internet retail, also known as **e-commerce**, is the largest sector of the elec
 
 My task is to build the back end for an e-commerce site by modifying starter code. I configured a working Express.js API to use Sequelize to interact with my MySQL database.
 
-Because this application won’t be deployed, I did a video walk through linked [here.]()
+Because this application won’t be deployed, I did a video walk through linked [here.]([)](https://drive.google.com/file/d/1IdacExW4t0zpX-B3DnVH1-P7g1tjJ_5F/view)
 and below I am linking a picture of my project!
+![Screenshot 2023-05-04 at 10 11 16 PM](https://user-images.githubusercontent.com/128105814/236364715-f664cc0b-f96d-4162-bb7f-183b2df66bdd.png)
+![Screenshot 2023-05-04 at 10 11 24 PM](https://user-images.githubusercontent.com/128105814/236364718-2ceb6923-2b70-40df-aa81-f1bf3f737bc8.png)
 
 
 ## User Story
@@ -33,22 +35,6 @@ THEN the data for each of these routes is displayed in a formatted JSON
 WHEN I test API POST, PUT, and DELETE routes in Insomnia
 THEN I am able to successfully create, update, and delete data in my database
 ```
-
-## Mock-Up
-
-The following animation shows the application's GET routes to return all categories, all products, and all tags being tested in Insomnia:
-
-![In Insomnia, the user tests “GET tags,” “GET Categories,” and “GET All Products.”.](./Assets/13-orm-homework-demo-01.gif)
-
-The following animation shows the application's GET routes to return a single category, a single product, and a single tag being tested in Insomnia:
-
-![In Insomnia, the user tests “GET tag by id,” “GET Category by ID,” and “GET One Product.”](./Assets/13-orm-homework-demo-02.gif)
-
-The following animation shows the application's POST, PUT, and DELETE routes for categories being tested in Insomnia:
-
-![In Insomnia, the user tests “DELETE Category by ID,” “CREATE Category,” and “UPDATE Category.”](./Assets/13-orm-homework-demo-03.gif)
-
-Your walkthrough video should also show the POST, PUT, and DELETE routes for products and tags being tested in Insomnia.
 
 ## Getting Started
 
